@@ -54,6 +54,9 @@ def main():
     df_salaries = pd.read_csv("data/ds_salaries.csv")
     distribution_mean = generate_working_hour_means(df_salaries)
     df_salaries = generate_working_hours(df_salaries, distribution_mean)
+    df_salaries['age'] = df_salaries['experience_level'].apply(generate_age)
+    df_salaries['gender'] = df_salaries['salary_in_usd'].apply(generate_gender)
+    
     df_salaries.to_csv("data/df_salaries.csv", index=False)
 
 
