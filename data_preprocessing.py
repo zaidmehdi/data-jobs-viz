@@ -66,8 +66,21 @@ def group_job_titles(df_salaries:pd.DataFrame):
     return df_salaries
 
 
+def encode_remote_ratio(df_salaries:pd.DataFrame):
+    encoding_dict = {
+        100: "remote",
+        50: "hybrid",
+        0: "f2f"
+    }
+
+    df_salaries["remote_ratio"] = df_salaries["remote_ratio"].replace(encoding_dict)
+
+    return df_salaries
+
+
 def preprocess_data(df_salaries:pd.DataFrame):
     df_salaries = group_job_titles(df_salaries)
+    df_salaries = encode_remote_ratio(df_salaries)
 
     return df_salaries
 
