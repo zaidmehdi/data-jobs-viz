@@ -1,9 +1,8 @@
 from dash import dash, dcc, html, Input, Output
 import pandas as pd
 
-from plots import boxplot_salary_gender_job_title, \
-                histogram_salary_company_size, \
-                histogram_weekly_hours_seniority_level
+from plots import boxplot_salary_gender_job_title, histogram_salary_company_size, \
+                histogram_weekly_hours_seniority_level, heatmap_median_salary
 from utils import get_frequent_company_locations
 
 
@@ -25,10 +24,14 @@ app.layout = html.Div(children=[
         id='country-dropdown',
         options=[{'label': country, 'value': country} 
                     for country in get_frequent_company_locations(df_salaries)],
-        value=['US', 'GB'],
+        value=['USA', 'GBR'],
         multi=True
     ),
-    dcc.Graph(id='3')
+    dcc.Graph(id='3'),
+    dcc.Graph(
+        id='4',
+        figure=heatmap_median_salary(df_salaries)
+    )
 ])
 
 
