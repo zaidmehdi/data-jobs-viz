@@ -44,8 +44,6 @@ app.layout = html.Div(children=[
 ], style={'margin': '0', 'padding': '0'})
 
 
-
-
 @app.callback(
     Output('3', 'figure'),
     [Input('country-dropdown', 'value')]
