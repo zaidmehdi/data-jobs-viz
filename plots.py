@@ -9,6 +9,7 @@ def boxplot_salary_gender_job_title(df_salaries:pd.DataFrame):
         xaxis=dict(title='Job Type', tickfont=dict(size=10)),
         yaxis=dict(title='Salary (USD)', tickfont=dict(size=10)),
         legend_title='Gender',
+        height=250,
         showlegend=True,
         margin=dict(t=50, b=50, l=50, r=50))
     fig.update_xaxes(title_standoff=10)
@@ -25,6 +26,7 @@ def histogram_salary_company_size(df_salaries:pd.DataFrame):
         yaxis=dict(title='Percentage', tickfont=dict(size=10)),
         legend_title='Company Size',
         showlegend=True,
+        height=250,
         margin=dict(t=50, b=50, l=50, r=50))
     fig.update_xaxes(title_standoff=10)
     fig.update_yaxes(title_standoff=10)
@@ -45,7 +47,7 @@ def histogram_weekly_hours_seniority_level(df_salaries:pd.DataFrame):
         margin=dict(t=50, b=50, l=50, r=50))
     fig.update_xaxes(title_standoff=10)
     fig.update_yaxes(title_text='Percentage', title_standoff=10)
-    fig.update_layout(height=800)
+    fig.update_layout(height=500)
     
     return fig
 
