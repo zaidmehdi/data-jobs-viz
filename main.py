@@ -12,27 +12,36 @@ df_salaries = pd.read_csv("data/df_salaries.csv")
 
 app.layout = html.Div(children=[
     html.H1(children='Which Job should I choose?'),
-    dcc.Graph(
-        id='1',
-        figure=boxplot_salary_gender_job_title(df_salaries)
-    ),
-    dcc.Graph(
-        id='2',
-        figure=histogram_salary_company_size(df_salaries)
-    ),
+    html.Div([
+        html.Div([
+            dcc.Graph(
+                id='1',
+                figure=boxplot_salary_gender_job_title(df_salaries)
+            ),
+            dcc.Graph(
+                id='2',
+                figure=histogram_salary_company_size(df_salaries)
+            ),
+        ], style={'width': '49%', 'display': 'inline-block'}),
+        html.Div([
+            dcc.Graph(
+                id='3',
+            )
+        ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
+    ]),
     dcc.Dropdown(
         id='country-dropdown',
         options=[{'label': country, 'value': country} 
-                    for country in get_frequent_company_locations(df_salaries)],
+                 for country in get_frequent_company_locations(df_salaries)],
         value=['USA', 'GBR'],
         multi=True
     ),
-    dcc.Graph(id='3'),
     dcc.Graph(
         id='4',
         figure=heatmap_median_salary(df_salaries)
     )
 ])
+
 
 
 @app.callback(
