@@ -50,13 +50,34 @@ def generate_working_hours(df, distribution_mean: dict):
     return df
 
 
-def main():
-    df_salaries = pd.read_csv("data/ds_salaries.csv")
+def generate_data(df_salaries:pd.DataFrame) -> pd.DataFrame:
     distribution_mean = generate_working_hour_means(df_salaries)
     df_salaries = generate_working_hours(df_salaries, distribution_mean)
     df_salaries['age'] = df_salaries['experience_level'].apply(generate_age)
     df_salaries['gender'] = df_salaries['salary_in_usd'].apply(generate_gender)
+
+    return df_salaries
+
+
+def group_job_titles(df_salaries:pd.DataFrame):
+    top_job_titles = df_salaries['job_title'].value_counts().nlargest(4).index
+    df_salaries['job_title_grouped'] = df_salaries['job_title'].apply(
+        lambda x: x if x in top_job_titles else 'Other')
     
+    return df_salaries
+
+
+def preprocess_data(df_salaries:pd.DataFrame):
+    df_salaries = group_job_titles(df_salaries)
+
+    return df_salaries
+
+
+def main():
+    df_salaries = pd.read_csv("data/ds_salaries.csv")
+    df_salaries = generate_data(df_salaries)
+    df_salaries = preprocess_data(df_salaries)
+
     df_salaries.to_csv("data/df_salaries.csv", index=False)
 
 
