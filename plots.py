@@ -29,12 +29,15 @@ def histogram_salary_company_size(df_salaries:pd.DataFrame):
 def histogram_weekly_hours_seniority_level(df_salaries:pd.DataFrame):
     fig = px.histogram(df_salaries, x='weekly_hours', color='company_location',
                        title='Weekly Working Hours Distribution by Company Location',
-                       barmode='overlay', histnorm='percent')
+                       barmode='overlay', histnorm='percent', facet_row="remote_ratio")
+    
     fig.update_layout(
         xaxis=dict(title='Weekly Working Hours'),
         yaxis=dict(title='Percentage'),
         legend_title='Country',
         showlegend=True)
+    fig.update_yaxes(title_text='Percentage')
+    fig.update_layout(height=800)
     
     return fig
 
