@@ -14,10 +14,21 @@ def boxplot_salary_gender_job_title(df_salaries:pd.DataFrame):
 
     return fig
 
+def histogram_salary_company_size(df_salaries:pd.DataFrame):
+    fig = px.histogram(df_salaries, x='salary_in_usd', color='company_size', 
+                   histnorm='percent', barmode='overlay', title='Histogram of Salaries by Company Size')
+    fig.update_layout(
+        xaxis=dict(title='Salary (USD)'),
+        yaxis=dict(title='Percentage'),
+        legend_title='Company Size',
+        showlegend=True)
+
+    return fig
+
 
 def main():
     df_salaries = pd.read_csv("data/df_salaries.csv")
-    fig = boxplot_salary_gender_job_title(df_salaries)
+    fig = histogram_salary_company_size(df_salaries)
     fig.show()
 
 if __name__ == "__main__":
