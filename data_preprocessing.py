@@ -1,6 +1,7 @@
 import random
 
 import pandas as pd
+from pycountry_convert import country_alpha2_to_country_name, country_name_to_country_alpha3
 import numpy as np
 
 
@@ -77,10 +78,15 @@ def encode_remote_ratio(df_salaries:pd.DataFrame):
 
     return df_salaries
 
+def convert_country_codes(df_salaries:pd.DataFrame):
+    df_salaries['company_location'] = df_salaries.company_location.apply(lambda x: country_name_to_country_alpha3(country_alpha2_to_country_name(x)))
+
+    return df_salaries
 
 def preprocess_data(df_salaries:pd.DataFrame):
     df_salaries = group_job_titles(df_salaries)
     df_salaries = encode_remote_ratio(df_salaries)
+    df_salaries = convert_country_codes(df_salaries)
 
     return df_salaries
 
