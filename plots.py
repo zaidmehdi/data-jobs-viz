@@ -42,9 +42,23 @@ def histogram_weekly_hours_seniority_level(df_salaries:pd.DataFrame):
     return fig
 
 
+def heatmap_median_salary(df_salaries:pd.DataFrame):
+    median_salaries = df_salaries.groupby('company_location')['salary_in_usd'].median().reset_index()
+    print(median_salaries)
+
+    fig = px.choropleth(median_salaries, 
+                    locations='company_location', 
+                    color='salary_in_usd', 
+                    color_continuous_scale=px.colors.sequential.Blues,
+                    range_color=(0, median_salaries['salary_in_usd'].max()),
+                    labels={'salary_in_usd': 'Median Salary (USD)'}
+                   )
+    return fig
+
+
 def main():
     df_salaries = pd.read_csv("data/df_salaries.csv")
-    fig = histogram_weekly_hours_seniority_level(df_salaries)
+    fig = heatmap_median_salary(df_salaries)
     fig.show()
 
 
