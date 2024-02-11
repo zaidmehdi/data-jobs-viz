@@ -11,7 +11,7 @@ app = dash.Dash(__name__)
 df_salaries = pd.read_csv("data/df_salaries.csv")
 
 app.layout = html.Div(children=[
-    html.H1(children='Which Job should I choose?'),
+    html.H1(children='Which Job should I choose?', style={'margin': '0px', 'padding': '0'}),
     html.Div([
         html.Div([
             dcc.Graph(
@@ -22,25 +22,27 @@ app.layout = html.Div(children=[
                 id='2',
                 figure=histogram_salary_company_size(df_salaries)
             ),
-        ], style={'width': '49%', 'display': 'inline-block'}),
+        ], style={'width': '49%', 'display': 'inline-block', 'margin': '0px', 'padding': '0'}),
         html.Div([
             dcc.Graph(
                 id='3',
             )
-        ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
+        ], style={'width': '49%', 'float': 'right', 'display': 'inline-block', 'margin': '0px', 'padding': '0'})
     ]),
     dcc.Dropdown(
         id='country-dropdown',
         options=[{'label': country, 'value': country} 
                  for country in get_frequent_company_locations(df_salaries)],
         value=['USA', 'GBR'],
-        multi=True
+        multi=True,
+        style={'margin': '0px', 'padding': '0px'}
     ),
     dcc.Graph(
         id='4',
         figure=heatmap_median_salary(df_salaries)
     )
-])
+], style={'margin': '0', 'padding': '0'})
+
 
 
 
