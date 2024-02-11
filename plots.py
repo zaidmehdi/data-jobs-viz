@@ -65,6 +65,9 @@ def heatmap_median_salary(df_salaries:pd.DataFrame):
     fig.update_layout(
         title_text="Median Salary by Country",
         margin=dict(t=50, b=50, l=50, r=50),
+        title_y=0.5,
+        title_x=0.1,
+        height=530,
         geo=dict(
             showcoastlines=True)
             )

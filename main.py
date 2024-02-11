@@ -26,17 +26,17 @@ app.layout = html.Div(children=[
         html.Div([
             dcc.Graph(
                 id='3',
-            )
-        ], style={'width': '49%', 'float': 'right', 'display': 'inline-block', 'margin': '0px', 'padding': '0'})
+            ),
+            dcc.Dropdown(
+                id='country-dropdown',
+                options=[{'label': country, 'value': country} 
+                         for country in get_frequent_company_locations(df_salaries)],
+                value=['USA', 'GBR'],
+                multi=True,
+                style={'margin': '0px', 'padding': '0px'}
+            ),
+        ], style={'width': '49%', 'display': 'inline-block', 'margin': '0px', 'padding': '0'})
     ]),
-    dcc.Dropdown(
-        id='country-dropdown',
-        options=[{'label': country, 'value': country} 
-                 for country in get_frequent_company_locations(df_salaries)],
-        value=['USA', 'GBR'],
-        multi=True,
-        style={'margin': '0px', 'padding': '0px'}
-    ),
     dcc.Graph(
         id='4',
         figure=heatmap_median_salary(df_salaries)
