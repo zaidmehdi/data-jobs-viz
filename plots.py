@@ -2,7 +2,6 @@ import pandas as pd
 import plotly.express as px
 
 
-
 def boxplot_salary_gender_job_title(df_salaries:pd.DataFrame):
     fig = px.box(df_salaries, x='job_title_grouped', y='salary_in_usd', 
                  color='gender', title='Boxplot of Salary by Gender and Job Type')
@@ -13,6 +12,7 @@ def boxplot_salary_gender_job_title(df_salaries:pd.DataFrame):
         showlegend=True)
 
     return fig
+
 
 def histogram_salary_company_size(df_salaries:pd.DataFrame):
     fig = px.histogram(df_salaries, x='salary_in_usd', color='company_size', 
@@ -30,6 +30,7 @@ def main():
     df_salaries = pd.read_csv("data/df_salaries.csv")
     fig = histogram_salary_company_size(df_salaries)
     fig.show()
+
 
 if __name__ == "__main__":
     main()

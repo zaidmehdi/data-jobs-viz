@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 
 
-
 def generate_age(experience_level):
     if experience_level == "SE":
         return int(np.random.normal(loc=40, scale=5))
