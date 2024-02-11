@@ -6,10 +6,13 @@ def boxplot_salary_gender_job_title(df_salaries:pd.DataFrame):
     fig = px.box(df_salaries, x='job_title_grouped', y='salary_in_usd', 
                  color='gender', title='Boxplot of Salary by Gender and Job Type')
     fig.update_layout(
-        xaxis=dict(title='Job Type'),
-        yaxis=dict(title='Salary (USD)'),
+        xaxis=dict(title='Job Type', tickfont=dict(size=10)),
+        yaxis=dict(title='Salary (USD)', tickfont=dict(size=10)),
         legend_title='Gender',
-        showlegend=True)
+        showlegend=True,
+        margin=dict(t=50, b=50, l=50, r=50))
+    fig.update_xaxes(title_standoff=10)
+    fig.update_yaxes(title_standoff=10)
 
     return fig
 
@@ -18,10 +21,13 @@ def histogram_salary_company_size(df_salaries:pd.DataFrame):
     fig = px.histogram(df_salaries, x='salary_in_usd', color='company_size', 
                    histnorm='percent', barmode='overlay', title='Histogram of Salaries by Company Size')
     fig.update_layout(
-        xaxis=dict(title='Salary (USD)'),
-        yaxis=dict(title='Percentage'),
+        xaxis=dict(title='Salary (USD)', tickfont=dict(size=10)),
+        yaxis=dict(title='Percentage', tickfont=dict(size=10)),
         legend_title='Company Size',
-        showlegend=True)
+        showlegend=True,
+        margin=dict(t=50, b=50, l=50, r=50))
+    fig.update_xaxes(title_standoff=10)
+    fig.update_yaxes(title_standoff=10)
 
     return fig
 
@@ -32,11 +38,13 @@ def histogram_weekly_hours_seniority_level(df_salaries:pd.DataFrame):
                        barmode='overlay', histnorm='percent', facet_row="remote_ratio")
     
     fig.update_layout(
-        xaxis=dict(title='Weekly Working Hours'),
-        yaxis=dict(title='Percentage'),
+        xaxis=dict(title='Weekly Working Hours', tickfont=dict(size=10)),
+        yaxis=dict(title='Percentage', tickfont=dict(size=10)),
         legend_title='Country',
-        showlegend=True)
-    fig.update_yaxes(title_text='Percentage')
+        showlegend=True,
+        margin=dict(t=50, b=50, l=50, r=50))
+    fig.update_xaxes(title_standoff=10)
+    fig.update_yaxes(title_text='Percentage', title_standoff=10)
     fig.update_layout(height=800)
     
     return fig
@@ -54,6 +62,7 @@ def heatmap_median_salary(df_salaries:pd.DataFrame):
                    )
     fig.update_layout(
         title_text="Median Salary by Country",
+        margin=dict(t=50, b=50, l=50, r=50),
         geo=dict(
             showcoastlines=True)
             )
